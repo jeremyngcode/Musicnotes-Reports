@@ -1,4 +1,5 @@
 import pathlib
+import pprint
 # -------------------------------------------------------------------------------------------------
 
 # EDIT ACCORDINGLY
@@ -14,4 +15,13 @@ musicnotes_xl_file = pathlib.Path(
 # Script writes to this file
 xl_file = pathlib.Path(
 	"C:/path/to/my/excel_file.xlsx"
+)
+
+# Settings for pprint PrettyPrinter
+custom_printer = pprint.PrettyPrinter(
+	depth=None,
+	indent=1,
+	width=100,
+	sort_dicts=False,
+	compact=False
 )

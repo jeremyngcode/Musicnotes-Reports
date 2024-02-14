@@ -9,28 +9,33 @@ xl_sheet = xl_wb.worksheets[0]
 # Retrieve sheetmusic titles
 master_list = []
 
-for row in xl_sheet.iter_rows(min_col=1, max_col=1):
+for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=1):
 	if row[0].value is not None:
 		master_list.append(row[0].value)
-
-master_list = master_list[1:-1]
+	else:
+		break
 
 # Open Musicnotes Excel workbook
 xl_wb = load_workbook(musicnotes_xl_file)
 xl_sheet = xl_wb.worksheets[0]
 
 # Retrieve sheetmusic revenue data
+print('Retrieving data..')
+
 musicnotes_data = {}
 
-for row in xl_sheet.iter_rows(min_col=2, max_col=6):
+for row in xl_sheet.iter_rows(min_row=5, min_col=2, max_col=6):
 	if row[0].value is not None:
 		musicnotes_data[row[0].value.lower()] = {
 			'Downloads': row[2].value,
 			'Sales': row[3].value,
 			'Revenue': row[4].value
 		}
+	else:
+		break
 
-del musicnotes_data['title']
+custom_printer.pprint(musicnotes_data)
+print()
 
 # Open Latest Revenue Excel workbook
 xl_wb = load_workbook(xl_file)
@@ -49,9 +54,10 @@ for row, title in enumerate(master_list, 4):
 	title = title.lower()
 
 	if title in musicnotes_data:
-		xl_sheet[f'B{row}'] = musicnotes_data[title]['Downloads']
-		xl_sheet[f'C{row}'] = round(musicnotes_data[title]['Sales'], 2)
-		xl_sheet[f'D{row}'] = round(musicnotes_data[title]['Revenue'], 2)
+		title_data = musicnotes_data[title]
+		xl_sheet[f'B{row}'] = title_data['Downloads']
+		xl_sheet[f'C{row}'] = round(title_data['Sales'], 2)
+		xl_sheet[f'D{row}'] = round(title_data['Revenue'], 2)
 
 # Update sheet title
 xl_sheet.title = statement_period
