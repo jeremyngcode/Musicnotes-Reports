@@ -1,0 +1,60 @@
+from openpyxl import load_workbook
+from settings import *
+# -------------------------------------------------------------------------------------------------
+
+# Open Master Excel workbook
+xl_wb = load_workbook(master_xl_file)
+xl_sheet = xl_wb.worksheets[0]
+
+# Retrieve sheetmusic titles
+master_list = []
+
+for row in xl_sheet.iter_rows(min_col=1, max_col=1):
+	if row[0].value is not None:
+		master_list.append(row[0].value)
+
+master_list = master_list[1:-1]
+
+# Open Musicnotes Excel workbook
+xl_wb = load_workbook(musicnotes_xl_file)
+xl_sheet = xl_wb.worksheets[0]
+
+# Retrieve sheetmusic revenue data
+musicnotes_data = {}
+
+for row in xl_sheet.iter_rows(min_col=2, max_col=6):
+	if row[0].value is not None:
+		musicnotes_data[row[0].value.lower()] = {
+			'Downloads': row[2].value,
+			'Sales': row[3].value,
+			'Revenue': row[4].value
+		}
+
+del musicnotes_data['title']
+
+# Open Latest Revenue Excel workbook
+xl_wb = load_workbook(xl_file)
+xl_sheet = xl_wb.worksheets[0]
+
+# Delete previous data
+for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=4):
+	for cell in row:
+		cell.value = None
+
+# Write data
+print('Writing data..')
+
+for row, title in enumerate(master_list, 4):
+	xl_sheet[f'A{row}'] = title
+	title = title.lower()
+
+	if title in musicnotes_data:
+		xl_sheet[f'B{row}'] = musicnotes_data[title]['Downloads']
+		xl_sheet[f'C{row}'] = round(musicnotes_data[title]['Sales'], 2)
+		xl_sheet[f'D{row}'] = round(musicnotes_data[title]['Revenue'], 2)
+
+# Update sheet title
+xl_sheet.title = statement_period
+print()
+
+xl_wb.save(xl_file)
