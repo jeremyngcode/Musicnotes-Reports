@@ -16,7 +16,7 @@ The initial configuration requires entering the paths for `master_xl_file` and `
 The regular process every quarter then looks like this:
 1. Save the given Musicnotes Excel file and rename it.
 2. Change `musicnotes_xl_file` variable in settings.py to the path of the newly saved Musicnotes Excel file.
-3. Change `statement_period` variable in settings.py to the current reporting quarter (eg. '2024-Q1').
+3. Change `year` and `quarter` variables in settings.py to the reporting year and quarter respectively. (eg. '2023' and 'Q4').
 4. Run [Update_Sheetmusic_Sales_Report.py](Update_Sheetmusic_Sales_Report.py).
 
 The script will turn this (`xl_file`)...
