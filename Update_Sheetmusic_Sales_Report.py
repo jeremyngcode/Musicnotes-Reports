@@ -3,7 +3,7 @@ from settings import *
 # -------------------------------------------------------------------------------------------------
 
 # Open Master Excel workbook
-xl_wb = load_workbook(master_xl_file)
+xl_wb = load_workbook(master_xl_file, read_only=True)
 xl_sheet = xl_wb.worksheets[0]
 
 # Retrieve sheetmusic titles
@@ -16,7 +16,7 @@ for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=1):
 		break
 
 # Open Musicnotes Excel workbook
-xl_wb = load_workbook(musicnotes_xl_file)
+xl_wb = load_workbook(musicnotes_xl_file, read_only=True)
 xl_sheet = xl_wb.worksheets[0]
 
 # Retrieve sheetmusic revenue data
@@ -24,18 +24,20 @@ print('Retrieving data..')
 
 musicnotes_data = {}
 
-for row in xl_sheet.iter_rows(min_row=5, min_col=2, max_col=6):
-	if row[0].value is not None:
-		musicnotes_data[row[0].value.lower()] = {
-			'Downloads': row[2].value,
-			'Sales': row[3].value,
-			'Revenue': row[4].value
+for row in xl_sheet.iter_rows(min_row=5, min_col=2, max_col=6, values_only=True):
+	if row[0] is not None:
+		musicnotes_data[row[0].lower()] = {
+			'Downloads': row[2],
+			'Sales': row[3],
+			'Revenue': row[4]
 		}
 	else:
 		break
 
 custom_printer.pprint(musicnotes_data)
 print()
+
+
 
 # Open Latest Revenue Excel workbook
 xl_wb = load_workbook(xl_file)

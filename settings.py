@@ -5,7 +5,7 @@ import pprint
 # EDIT ACCORDINGLY
 year = 'YYYY'
 quarter = 'QQ'
-reporting_period = '-'.join([year, quarter])
+reporting_period = f'{year}-{quarter}'
 
 master_xl_file = pathlib.Path(
 	"C:/path/to/my/master_excel_file.xlsx"
