@@ -60,7 +60,7 @@ for row, title in enumerate(master_list, 4):
 		xl_sheet[f'D{row}'] = round(title_data['Revenue'], 2)
 
 # Update sheet title
-xl_sheet.title = statement_period
+xl_sheet.title = reporting_period
 print()
 
 xl_wb.save(xl_file)
