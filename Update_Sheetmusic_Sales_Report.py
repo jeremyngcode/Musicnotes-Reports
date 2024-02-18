@@ -45,8 +45,14 @@ xl_wb = load_workbook(xl_file)
 xl_sheet = xl_wb.worksheets[0]
 
 # Define styles
-no_border = Side(border_style=None)
-thin_border = Side(border_style='thin')
+boldunderline = Font(
+	bold=True,
+	underline='single'
+)
+undo_boldunderline = Font(
+	bold=False,
+	underline='none'
+)
 
 no_fill = PatternFill(patternType=None)
 grey_fill = PatternFill(
@@ -57,6 +63,9 @@ yellow_fill = PatternFill(
 	patternType='solid',
 	fgColor='FFFF00'
 )
+
+no_border = Side(border_style=None)
+thin_border = Side(border_style='thin')
 
 # Delete previous data
 for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=4):
@@ -70,6 +79,7 @@ for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=4):
 for row in xl_sheet[f'A{last_row_entry}:D{last_row_entry+1}']:
 	for cell in row:
 		cell.value = None
+		cell.font = undo_boldunderline
 		cell.fill = no_fill
 		cell.border = Border(
 			top=no_border,
@@ -105,13 +115,13 @@ totals_row = last_row_entry + 2
 for cell, col in zip(xl_sheet[totals_row][1:4], cols):
 	cell.value = f'=SUM({col}4:{col}{last_row_entry})'
 
+xl_sheet[f'A{totals_row}'] = 'TOTAL:'
+xl_sheet[f'A{totals_row}'].font = boldunderline
+
 # Write reporting period as header
 header = xl_sheet['B1']
 
-header.font = Font(
-	bold=True,
-	underline='single'
-)
+header.font = boldunderline
 
 if quarter == 'Q1':
 	header.value = f'{year} {quarter}'
@@ -132,13 +142,13 @@ for cell in xl_sheet['D']:
 # Style total revenue cell
 total_revenue = xl_sheet[f'D{totals_row}']
 
+total_revenue.fill = yellow_fill
 total_revenue.border = Border(
 	top=thin_border,
 	right=thin_border,
 	bottom=thin_border,
 	left=thin_border
 )
-total_revenue.fill = yellow_fill
 
 # Update sheet title
 xl_sheet.title = reporting_period
