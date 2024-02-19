@@ -7,11 +7,9 @@ I get my sheetmusic revenue reports quarterly from [Musicnotes](https://www.musi
 
 The Process
 -----------
-An Excel file template is created (sample available in template folder). This is the file that gets written on by the script, subsequent runs will simply overwrite.
-
-The initial configuration requires entering the paths for `master_xl_file` and `xl_file` in [settings.py](settings.py):
+The initial configuration requires entering the paths for `master_xl_file` and `output_file` in [settings.py](settings.py):
 - `master_xl_file`: The master Excel file that holds all my Musicnotes revenue data from the beginning, and is where the script will retrieve my sheetmusic titles.
-- `xl_file`: The script writes to this template Excel file, which I will then copy over to my `master_xl_file` with one copy-paste.
+- `output_file`: The output path of the script, which I will then copy over to my master Excel file with one copy-paste.
 
 The regular process every quarter then looks like this:
 1. Save the given Musicnotes Excel file and rename it.
@@ -19,17 +17,17 @@ The regular process every quarter then looks like this:
 3. Change `year` and `quarter` variables in settings.py to the reporting year and quarter respectively. (eg. '2023' and 'Q4').
 4. Run [Update_Sheetmusic_Sales_Report.py](Update_Sheetmusic_Sales_Report.py).
 
-The script will turn this (`xl_file`)...
+The script will turn this template ([xl-template.xlsx](xl-template.xlsx))...
 
-![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/a5f706cb-4cd7-4eca-9e5a-f4f89987e329)
+![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/bba666fe-8006-4f9a-b4f6-6d3a9aefd8c1)
 
 into this...
 
-![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/63c29f62-5157-4b5f-9266-e4dc56b0b1c6)
+![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/e158e875-1523-4d1f-b144-e58be4b60f21)
 
 Blank cells mean I didn't have any sales for the corresponding title.
 
-5. Copy-paste columns B to D from here into my `master_xl_file`.
+5. Copy-paste columns B to D from here into the master Excel file.
 6. Save the file and that's it. 😃
 
 Extra Thoughts
