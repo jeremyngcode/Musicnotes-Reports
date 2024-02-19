@@ -17,7 +17,7 @@ The regular process every quarter then looks like this:
 3. Change `year` and `quarter` variables in settings.py to the reporting year and quarter respectively. (eg. '2023' and 'Q4').
 4. Run [Update_Sheetmusic_Sales_Report.py](Update_Sheetmusic_Sales_Report.py).
 
-The script will turn this template ([xl-template.xlsx](xl-template.xlsx))...
+The script will turn this template... ([xl-template.xlsx](xl-template.xlsx))
 
 ![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/bba666fe-8006-4f9a-b4f6-6d3a9aefd8c1)
 
