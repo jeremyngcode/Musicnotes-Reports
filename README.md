@@ -21,20 +21,22 @@ The regular process every quarter then looks like this:
 
 The script will turn this (`xl_file`)...
 
-![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/84569b3d-62bf-4e0f-a562-3d410b5212c9)
+![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/a5f706cb-4cd7-4eca-9e5a-f4f89987e329)
 
 into this...
 
-![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/76f08822-1bee-419b-8901-69641ec0b5fc)
+![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/63c29f62-5157-4b5f-9266-e4dc56b0b1c6)
 
 Blank cells mean I didn't have any sales for the corresponding title.
 
-5. Make one copy-paste from here to my `master_xl_file`.
+5. Copy-paste columns B to D from here into my `master_xl_file`.
 6. Save the file and that's it. 😃
 
 Extra Thoughts
 --------------
 - Same as before, I prefer having my script write to a template file first instead of the master Excel file directly because I didn't want to risk having my code mess up something in the master. It would only save me one copy-paste action anyway.
+
+- I decided to explore a little deeper into the openpyxl library this time, so instead of just writing and retrieving values, I played around with styles as well for the first time. The ones I've added are actually present in the master Excel file, so this actually saves me a few extra clicks too.
 
 - Maybe it's a little overkill, I only needed to do this 4 times a year after all. But really, it's mostly just another excuse for me to write more code. And more practice. 😁
 
