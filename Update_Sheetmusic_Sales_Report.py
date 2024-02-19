@@ -3,7 +3,7 @@ from openpyxl.styles import Font, PatternFill, Border, Side
 from settings import *
 # -------------------------------------------------------------------------------------------------
 
-# Open Master Excel workbook
+# Load Master Excel workbook
 xl_wb = load_workbook(master_xl_file, read_only=True)
 xl_sheet = xl_wb.worksheets[0]
 
@@ -16,7 +16,7 @@ for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=1):
 	else:
 		break
 
-# Open Musicnotes Excel workbook
+# Load Musicnotes Excel workbook
 xl_wb = load_workbook(musicnotes_xl_file, read_only=True)
 xl_sheet = xl_wb.worksheets[0]
 
@@ -40,8 +40,8 @@ print()
 
 
 
-# Open Latest Revenue Excel workbook
-xl_wb = load_workbook(xl_file)
+# Load template file
+xl_wb = load_workbook(template_xl_file)
 xl_sheet = xl_wb.worksheets[0]
 
 # Define styles
@@ -49,12 +49,7 @@ boldunderline = Font(
 	bold=True,
 	underline='single'
 )
-undo_boldunderline = Font(
-	bold=False,
-	underline='none'
-)
 
-no_fill = PatternFill(patternType=None)
 grey_fill = PatternFill(
 	patternType='solid',
 	fgColor='808080'
@@ -64,31 +59,7 @@ yellow_fill = PatternFill(
 	fgColor='FFFF00'
 )
 
-no_border = Side(border_style=None)
 thin_border = Side(border_style='thin')
-
-# Delete previous data
-for row in xl_sheet.iter_rows(min_row=4, min_col=1, max_col=4):
-	if row[0].value is None:
-		last_row_entry = row[0].row
-		break
-
-	for cell in row:
-		cell.value = None
-
-for row in xl_sheet[f'A{last_row_entry}:D{last_row_entry+1}']:
-	for cell in row:
-		cell.value = None
-		cell.font = undo_boldunderline
-		cell.fill = no_fill
-		cell.border = Border(
-			top=no_border,
-			right=no_border,
-			bottom=no_border,
-			left=no_border
-		)
-
-xl_sheet['B1'] = None
 
 # Write data
 print('Writing data..')
@@ -128,16 +99,8 @@ if quarter == 'Q1':
 	header.fill = yellow_fill
 elif quarter in ('Q2', 'Q3', 'Q4'):
 	header.value = quarter
-	header.fill = no_fill
 else:
 	raise ValueError('Invalid quarter input in settings.')
-
-# Add right outer border
-col_D = xl_sheet.column_dimensions['D']
-col_D.border = Border(right=thin_border)
-
-for cell in xl_sheet['D']:
-	cell.border = Border(right=thin_border)
 
 # Style total revenue cell
 total_revenue = xl_sheet[f'D{totals_row}']
@@ -154,4 +117,4 @@ total_revenue.border = Border(
 xl_sheet.title = reporting_period
 print()
 
-xl_wb.save(xl_file)
+xl_wb.save(output_file)

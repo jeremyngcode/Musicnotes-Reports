@@ -1,3 +1,4 @@
+from os import path
 import pathlib
 import pprint
 # -------------------------------------------------------------------------------------------------
@@ -13,10 +14,13 @@ master_xl_file = pathlib.Path(
 musicnotes_xl_file = pathlib.Path(
 	"C:/path/to/my/latest_musicnotes_revenue_report.xlsx"
 )
+template_xl_file = pathlib.Path(
+	path.join(path.dirname(__file__), "xl-template.xlsx")
+)
 
-# Script writes to this file
-xl_file = pathlib.Path(
-	"C:/path/to/my/excel_file.xlsx"
+# Script outputs to this file path
+output_file = pathlib.Path(
+	"C:/path/to/my/script_output.xlsx"
 )
 
 # Settings for pprint PrettyPrinter
