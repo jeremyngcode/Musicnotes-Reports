@@ -86,21 +86,17 @@ totals_row = last_row_entry + 2
 for cell, col in zip(xl_sheet[totals_row][1:4], cols):
 	cell.value = f'=SUM({col}4:{col}{last_row_entry})'
 
-xl_sheet[f'A{totals_row}'] = 'TOTAL:'
-xl_sheet[f'A{totals_row}'].font = boldunderline
+cell = xl_sheet[f'A{totals_row}']
+cell.value = 'TOTAL:'
+cell.font = boldunderline
 
 # Write reporting period as header
 header = xl_sheet['B1']
-
-header.font = boldunderline
+header.value = quarter
 
 if quarter == 'Q1':
 	header.value = f'{year} {quarter}'
 	header.fill = yellow_fill
-elif quarter in ('Q2', 'Q3', 'Q4'):
-	header.value = quarter
-else:
-	raise ValueError('Invalid quarter input in settings.')
 
 # Style total revenue cell
 total_revenue = xl_sheet[f'D{totals_row}']
