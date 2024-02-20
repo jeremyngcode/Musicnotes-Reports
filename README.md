@@ -19,7 +19,7 @@ The regular process every quarter then looks like this:
 
 The script will turn this template... ([xl-template.xlsx](xl-template.xlsx))
 
-![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/bba666fe-8006-4f9a-b4f6-6d3a9aefd8c1)
+![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/32826afc-b281-4eb2-98fe-6ca98fdb1482)
 
 into this...
 
