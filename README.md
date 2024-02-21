@@ -12,21 +12,23 @@ The initial configuration requires entering the paths for `master_xl_file` and `
 - `output_file`: The output path of the script, which I will then copy over to my master Excel file with one copy-paste.
 
 The regular process every quarter then looks like this:
-1. Save the given Musicnotes Excel file and rename it.
-2. Change `musicnotes_xl_file` variable in settings.py to the path of the newly saved Musicnotes Excel file.
-3. Change `year` and `quarter` variables in settings.py to the reporting year and quarter respectively. (eg. '2023' and 'Q4').
+1. Change `year` and `quarter` variables in settings.py to the reporting year and quarter respectively. `reporting_period` is then derived from those variables.
+   ```py
+   # Example
+   year = '2024'
+   quarter = 'Q1'
+   reporting_period = f'{year}-{quarter}' # 2024-Q1
+   ```
+2. Save the given Musicnotes Excel file and rename it.
+3. Change `musicnotes_xl_file` variable in settings.py to the path of the newly saved Musicnotes Excel file.
 4. Run [Update_Sheetmusic_Sales_Report.py](Update_Sheetmusic_Sales_Report.py).
 
-The script will turn this template... ([xl-template.xlsx](xl-template.xlsx))
+   The script will turn this template... ([xl-template.xlsx](xl-template.xlsx)) <br>
+   ![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/32826afc-b281-4eb2-98fe-6ca98fdb1482)
 
-![xl-template](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/32826afc-b281-4eb2-98fe-6ca98fdb1482)
-
-into this...
-
-![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/e158e875-1523-4d1f-b144-e58be4b60f21)
-
-Blank cells mean I didn't have any sales for the corresponding title.
-
+   into this... <br>
+   ![xl-template-filled](https://github.com/jeremyngcode/Musicnotes-Reports/assets/156220343/e158e875-1523-4d1f-b144-e58be4b60f21) <br>
+   Blank cells mean I didn't have any sales for the corresponding title.
 5. Copy-paste columns B to D from here into the master Excel file.
 6. Save the file and that's it. 😃
 
